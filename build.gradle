@@ -1,0 +1,79 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
+        classpath 'gradle.plugin.com.jamesward:atom-gradle-plugin:0.0.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+//apply plugin: 'com.jamesward.atomgradleplugin'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-devtools:1.4.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.4.2.RELEASE'
+    compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE'
+    compile 'org.webjars:bootstrap:2.3.1'
+}
+
+allprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+/*
+atom {
+    filesToOpen = ['README.md']
+    packages = ['heroku-tools']
+}
+*/
+
+import org.gradle.internal.os.OperatingSystem
+
+task devClasses(type: Exec) {
+    if (OperatingSystem.current().isWindows())
+        commandLine 'gradlew', '-t', 'classes'
+    else
+        commandLine './gradlew', '-t', 'classes'
+}
+
+task devBootRun(type: Exec) {
+    if (OperatingSystem.current().isWindows())
+        commandLine 'gradlew', 'bootRun'
+    else
+        commandLine './gradlew', 'bootRun' //, '--debug-jvm'
+}
+
+import java.util.concurrent.*
+
+task dev() << {
+    def devClassesFuture = Executors.newSingleThreadExecutor().submit({ devClasses.execute() } as Callable)
+    def devBootRunFuture = Executors.newSingleThreadExecutor().submit({ devBootRun.execute() } as Callable)
+    devClassesFuture?.get()
+    devBootRunFuture?.get()
+}
+
+/*
+task devWithAtom {
+    dependsOn tasks.atom
+}
+*/
+
+task stage {
+    dependsOn build
+}
+
+//defaultTasks 'devWithAtom'
