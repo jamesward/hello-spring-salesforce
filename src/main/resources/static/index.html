@@ -1,26 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Hello Spring Salesforce</title>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/2.3.1/css/bootstrap.min.css"/>
-    <style>
-        body {
-            margin-top: 60px;
-        }
-    </style>
-    <script type="text/javascript" src="webjars/jquery/1.9.0/jquery.min.js"></script>
-    <!--script type="text/javascript" src="index.js"></script-->
+
+    <link rel="stylesheet" type="text/css" href="webjars/salesforce-lightning-design-system/2.1.4/assets/styles/salesforce-lightning-design-system.min.css"/>
+
+    <script type="text/javascript" src="webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+          $.get("/accounts", function(data) {
+            $("tbody").empty();
+            $.each(data, function(i, account) {
+              var tr = $("<tr>");
+              tr.append($("<td>").text(account.Id));
+              tr.append($("<td>").text(account.Name));
+              tr.append($("<td>").text(account.Industry));
+              tr.append($("<td>").text(account.Rating));
+              $("tbody").append(tr);
+            });
+          });
+        });
+    </script>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a id="titleLink" class="brand" href="/">Hello Spring Salesforce</a>
+    <header class="slds-global-header_container">
+        <div class="slds-global-header slds-grid slds-grid--align-spread">
+            <div class="slds-global-header__item">
+                <div class="slds-text-heading--large">Hello Spring Salesforce</div>
             </div>
         </div>
-    </div>
-    <div class="container">
+    </header>
 
+    <div class="slds-container--center slds-container--medium" style="margin-top: 60px;">
+        <div class="slds-text-heading--medium">Salesforce Accounts</div>
+
+        <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Id</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Industry</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Rating</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

@@ -3,5 +3,13 @@
   "description": "Sample app that uses Spring and the Salesforce REST APIs",
   "repository": "https://github.com/jamesward/hello-spring-salesforce",
   "logo": "http://g00glen00b.be/wp-content/uploads/2012/08/spring-boot-logo.png",
-  "keywords": ["java", "spring", "spring boot", "salesforce"]
+  "keywords": ["java", "spring", "spring boot", "salesforce"],
+  "env": {
+    "SECURITY_OAUTH2_CLIENT_CLIENT_ID": {
+      "description": "The Salesforce Connected App's Client ID (Note: You might not have this yet.)"
+    },
+    "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": {
+      "description": "The Salesforce Connected App's Client Secret (Note: You might not have this yet.)"
+    }
+  }
 }

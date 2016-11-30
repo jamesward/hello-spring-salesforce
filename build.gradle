@@ -26,7 +26,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-devtools:1.4.2.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-security:1.4.2.RELEASE'
     compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE'
-    compile 'org.webjars:bootstrap:2.3.1'
+    compile 'org.webjars:salesforce-lightning-design-system:2.1.4'
+    compile 'org.webjars:jquery:3.1.1'
 }
 
 allprojects {
