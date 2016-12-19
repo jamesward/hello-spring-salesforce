@@ -6,10 +6,12 @@
   "keywords": ["java", "spring", "spring boot", "salesforce"],
   "env": {
     "SECURITY_OAUTH2_CLIENT_CLIENT_ID": {
-      "description": "The Salesforce Connected App's Client ID (Note: You might not have this yet.)"
+      "description": "The Salesforce Connected App's Client ID (Note: You might not have this yet.)",
+      "required": false
     },
     "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": {
-      "description": "The Salesforce Connected App's Client Secret (Note: You might not have this yet.)"
+      "description": "The Salesforce Connected App's Client Secret (Note: You might not have this yet.)",
+      "required": false
     }
   }
 }
